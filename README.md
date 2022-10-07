@@ -11,6 +11,6 @@ In the /resources/ folder there are 2 SQL scripts to create tables and add data 
 ## Running the server
 With the connection to the database made you should be able to connect to http://localhost:8080 and start using the endpoints
 
-##WebServices
-###/GET
+## WebServices
+### /GET
 ### `todos`
