@@ -11,6 +11,9 @@ In the /resources/ folder there are 2 SQL scripts to create tables and add data 
 ## Running the server
 With the connection to the database made you should be able to connect to http://localhost:8080 and start using the endpoints
 
+##
+In the /resources/ folder there are all the postman requests ready to be used
+
 ## WebServices
 ### GET
 ### `/todos`
@@ -21,4 +24,19 @@ Get a list of ToDos with pagination pageNumber parameter stands for the number o
 Get a list of ToDos filtered by the field sortBy and the direction specified by the parameter sortDir, also adds pagination like the previous endpoint.
   Expected parameters for sortBy : titulo, completado, usuario, id
   Expected parameters for sortDir: asc, desc
- ### `/todos/titulo/{title}
+### `/todos/titulo/{title}`
+Get a list of ToDos containing the text passed in the parameter title
+### `/todos/username/{username}`
+Get a list of ToDos of the given username
+ 
+### POST
+### `/todos/`
+Create a ToDo with, request body example
+`{
+    "titulo": "Example",
+    "usuario": 1,
+    "completado" : false
+}`
+### `/login/`
+Get a JWT Token if the log in is successfull, request body example
+
