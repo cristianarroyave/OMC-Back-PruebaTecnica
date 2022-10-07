@@ -58,3 +58,6 @@ Request body exapmle
 ### DELETE
 ### `/todos/{id}`
 Deletes a ToDo given the id passed as parameter
+
+## Spring Security 
+All the spring security part was done following this example https://www.youtube.com/watch?v=X80nJ5T7YpE
