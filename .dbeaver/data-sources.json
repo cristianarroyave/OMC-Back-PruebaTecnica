@@ -1,0 +1,55 @@
+{
+	"folders": {},
+	"connections": {
+		"postgres-jdbc-183acb80b59-5ef8f2081d372570": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "prueba",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "5432",
+				"database": "prueba",
+				"url": "jdbc:postgresql://localhost:5432/prueba",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"@dbeaver-show-unavailable-db@": "false",
+					"show-database-statistics": "false",
+					"@dbeaver-read-all-data-types-db@": "false",
+					"read-keys-with-columns": "false",
+					"@dbeaver-use-prepared-statements-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
+				"auth-model": "native"
+			}
+		}
+	},
+	"virtual-models": {
+		"postgres-jdbc-183acb80b59-5ef8f2081d372570": {
+			"prueba": {
+				"modelotodos": {
+					"@properties": {
+						"erd.diagram.state": {
+							"serialized": "<diagram version=\"1\" name=\"empty\" time=\"202210071009\"><entities><data-source id=\"postgres-jdbc-183acb80b59-5ef8f2081d372570\"><entity id=\"1\" name=\"todos\" fq-name=\"modelotodos.todos\" order=\"0\" border-width=\"3\" x=\"175\" y=\"43\"><path name=\"modelotodos\"/><path name=\"prueba\"/></entity><entity id=\"2\" name=\"usuarios\" fq-name=\"modelotodos.usuarios\" order=\"1\" x=\"424\" y=\"27\"><path name=\"modelotodos\"/><path name=\"prueba\"/></entity></data-source></entities><relations><relation name=\"usuarios_todo_fk\" fq-name=\"modelotodos.todos.usuarios_todo_fk\" type=\"fk\" pk-ref=\"2\" fk-ref=\"1\"/></relations></diagram>"
+						}
+					}
+				}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
