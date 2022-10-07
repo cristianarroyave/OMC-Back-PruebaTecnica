@@ -39,4 +39,22 @@ Create a ToDo with, request body example
 }`
 ### `/login/`
 Get a JWT Token if the log in is successfull, request body example
+`{
+    "username" : "test",
+    "password" : "test"
+}`
 
+### PUT
+### `/todos/{id}`
+Modify a ToDo given the id passed as parameter, only users with JWT Token may be able to access this endpoint, and only users that own the ToDo may be able to modify it.
+Add the Authorization header like this: Bearer {JwtToken}
+Request body exapmle
+`{
+        "titulo": "Modified with JTW Token",
+        "completado": false,
+        "usuario" : 1
+}`
+
+### DELETE
+### `/todos/{id}`
+Deletes a ToDo given the id passed as parameter
