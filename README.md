@@ -12,5 +12,13 @@ In the /resources/ folder there are 2 SQL scripts to create tables and add data 
 With the connection to the database made you should be able to connect to http://localhost:8080 and start using the endpoints
 
 ## WebServices
-### /GET
-### `todos`
+### GET
+### `/todos`
+Get the first 10 ToDos available
+### `/todos/{pageNumber}/{pageLength}`
+Get a list of ToDos with pagination pageNumber parameter stands for the number of the page you want to see, and pageLength for the items in each page
+### `/todos/{pageNumber}/{pageLenght}/{sortBy}/{sortDir}`
+Get a list of ToDos filtered by the field sortBy and the direction specified by the parameter sortDir, also adds pagination like the previous endpoint.
+  Expected parameters for sortBy : titulo, completado, usuario, id
+  Expected parameters for sortDir: asc, desc
+ ### `/todos/titulo/{title}
