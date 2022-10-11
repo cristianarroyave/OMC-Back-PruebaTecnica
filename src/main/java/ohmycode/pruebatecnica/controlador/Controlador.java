@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import ohmycode.pruebatecnica.servicios.ServicioTodos;
 import ohmycode.pruebatecnica.utils.JwtUtil;
 import org.springframework.http.HttpHeaders;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class Controlador {
 	
