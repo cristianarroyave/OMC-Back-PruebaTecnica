@@ -1,5 +1,7 @@
 package ohmycode.pruebatecnica.controlador;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import ohmycode.pruebatecnica.dto.PaginationAndSortingDTO;
 import ohmycode.pruebatecnica.dto.TodoDTO;
 import ohmycode.pruebatecnica.entidades.Todo;
 import ohmycode.pruebatecnica.excepciones.TodoException;
@@ -186,10 +189,10 @@ public class Controlador {
 	@PutMapping(
 			path = "/todos/{id}"
 			)
-	private ResponseEntity<?> modifyTodo(@RequestBody TodoDTO todo, @PathVariable(name = "id") Integer id, @RequestHeader(HttpHeaders.AUTHORIZATION) String token)
+	private ResponseEntity<?> modifyTodo(@RequestBody TodoDTO todo, @PathVariable(name = "id") Integer id, Principal principal)
 	{
 		try {
-			Todo response = srvTodos.modifyTodo(todo, id, token);
+			Todo response = srvTodos.modifyTodo(todo, id, principal.getName());
 			return ResponseEntity.ok(response);
 		} catch (TodoException e) {
 			return ResponseEntity.badRequest().body(e.getDatos());
@@ -207,6 +210,35 @@ public class Controlador {
 		try {
 			Todo response = srvTodos.deleteTodo(id);
 			return ResponseEntity.ok(response);
+		} catch (TodoException e) {
+			return ResponseEntity.internalServerError().body(e.getDatos());
+		}
+	}
+	
+	@PostMapping(
+		path = "/pagAndSort"
+	)
+	private ResponseEntity<?> PagAndSort(@RequestBody PaginationAndSortingDTO pagAndSort)
+	{
+		try {
+			if(pagAndSort == null)
+			{
+				return ResponseEntity.badRequest().build();
+			}
+			if(pagAndSort.getPagSize() == 0)
+			{
+				return ResponseEntity.badRequest().build();
+			}
+			List<Todo> todos = new ArrayList<Todo>();
+			if(pagAndSort.getSortBy() == null || pagAndSort.getSortDir() == null)
+			{
+				todos = repoTodos.findAll(PageRequest.of(pagAndSort.getPagNum(), pagAndSort.getPagSize())).getContent();
+			} 
+			else 
+			{
+				todos = srvTodos.searchTodoSorted(pagAndSort.getPagNum(), pagAndSort.getPagSize(), pagAndSort.getSortBy(), pagAndSort.getSortDir());
+			}
+			return ResponseEntity.ok(todos);
 		} catch (TodoException e) {
 			return ResponseEntity.internalServerError().body(e.getDatos());
 		}

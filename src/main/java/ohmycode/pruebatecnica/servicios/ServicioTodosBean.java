@@ -63,7 +63,7 @@ public class ServicioTodosBean implements ServicioTodos {
 	 * exists and the user is allowed to modify, owners can modify their own ToDos
 	 */	
 	@Override
-	public Todo modifyTodo(TodoDTO todo, Integer id, String token) throws TodoException
+	public Todo modifyTodo(TodoDTO todo, Integer id, String user) throws TodoException
 	{
 		Optional<Todo> todoOptional = repoTodos.findById(id);
 		if(todoOptional.isEmpty())
@@ -71,7 +71,7 @@ public class ServicioTodosBean implements ServicioTodos {
 			throw new TodoException(new DatosError<>(ErroresDeServicio.TODO_NO_EXISTE, "El todo no existe", id));
 		}
 		Todo todoEntity = todoOptional.get();
-		if (!canModifyTodo(todoEntity, token.substring(7)))
+		if (!canModifyTodo(todoEntity, user))
 		{
 			throw new TodoException(new DatosError<>(ErroresDeServicio.PERMISO_DENEGADO, "No puedes modificar este todo", todoEntity));
 		}
@@ -135,11 +135,9 @@ public class ServicioTodosBean implements ServicioTodos {
 	/*
 	 * Private method for validating that a user can modify a ToDo
 	 */	
-	private boolean canModifyTodo(Todo todo, String token)
+	private boolean canModifyTodo(Todo todo, String user)
 	{
-		String username = jwtUtil.extractUsername(token);
-		Optional<Usuario> usuarioOptional = repoUsuarios.findByUsernameLike(username);
-		return todo.getUsuario().equals(usuarioOptional.get());
+		return todo.getUsuario().getUsername().equals(user);
 	}
 
 }
